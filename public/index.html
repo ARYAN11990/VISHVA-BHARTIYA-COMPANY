@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VISHVA BHARTIYA COMPANY SIP</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <header>
+        <h1 class="logo"> 🌏 VISHVA BHARTIYA COMPANY</h1>
+        <nav class="nav-links">
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="why.html">Why SIP?</a></li>
+                <li><a href="calculator.html">Calculator</a></li>
+                <li><a href="signup.html">Sign Up</a></li>
+                <li><a href="login.html">Login</a></li>
+                <li><a href="contact.html">Contact</a></li>
+            </ul>
+        </nav>
+        <div class="burger-menu" onclick="toggleNav()" zindex="12">
+            <div class="line1"></div>
+            <div class="line2"></div>
+            <div class="line3"></div>
+        </div>
+    </header>
+
+    <main>
+        <section class="hero-carousel">
+            <div class="carousel-container">
+                <div class="carousel-slide fade">
+                    <img src="images/akhand_bharat.jpg" alt="Akhand Bharat">
+                    <div class="carousel-caption bottom-caption">
+                        <h3>Akhand Bharat: Invest in the Future of a Unified Nation</h3>
+                        <p>Our mission is to build a prosperous and strong India. Join us in this journey.</p>
+                    </div>
+                </div>
+                <div class="carousel-slide fade">
+                    <img src="images/gauseva.jpg" alt="Gauseva">
+                    <div class="carousel-caption bottom-caption">
+                        <h3>Gauseva: Serving Cows, Serving Dharma</h3>
+                        <p>A piece of every profit goes towards Gau Seva—because caring for our sacred cows isn’t just duty, it’s devotion."</p>
+                    </div>
+                </div>
+                <div class="carousel-slide fade">
+                    <img src="images/sip_invest.jpg" alt="SIP Investment">
+                    <div class="carousel-caption bottom-caption">
+                        <h3>Secure Your Future: Superior Returns with Akhand Bharat SIP</h3>
+                        <p>We offer competitive returns that outperform other market SIPs, ensuring your wealth grows faster.</p>
+                    </div>
+                </div>
+                <a class="prev" onclick="plusSlides(-1)">&#10094;</a>
+                <a class="next" onclick="plusSlides(1)">&#10095;</a>
+            </div>
+            <div class="hero-content top-hero-content">
+                <h2>Invest Smart. Grow Fast.</h2>
+                <a href="signup.html" class="btn">Start Now</a>
+            </div>
+        </section>
+
+        <section class="info-section">
+            <div class="info-box">
+                <div class="icon">📈</div>
+                <h3>Higher Returns, Guaranteed Growth</h3>
+                <p>Our SIP plans are designed for steady and superior growth, helping you build wealth with a disciplined and trusted approach.</p>
+            </div>
+            <div class="info-box">
+                <div class="icon">🚩</div>
+                <h3>The Akhand Bharat Commitment</h3>
+                <p>Every investment supports the vision of a stronger India, contributing to national progress and community welfare.</p>
+            </div>
+            <div class="info-box">
+                <div class="icon">🐄</div>
+                <h3>Support Gauseva</h3>
+                <p>A major share of our earnings goes to cow protection and care, preserving a tradition that nurtures both nature and faith.</p>
+            </div>
+        </section>
+
+        <section class="cta-section">
+            <h2>Ready to Invest in Your Future and Nation?</h2>
+            <p>Join thousands of investors who are building their wealth and contributing to a greater cause.</p>
+            <a href="signup.html" class="btn">Get Started Today</a>
+        </section>
+    </main>
+
+    <footer>
+        <p>© 2025 VISHVA BHARTIYA COMPANY. All rights reserved.</p>
+        <p>Committed to Indian Values, Serving the World.</p>
+    </footer>
+
+    <script src="js/script.js"></script>
+    <script>
+        const navLinks = document.querySelector('.nav-links');
+        function toggleNav() {
+            navLinks.classList.toggle('nav-active');
+        }
+
+        // New code for card animation
+        document.addEventListener('DOMContentLoaded', () => {
+            const infoBoxes = document.querySelectorAll('.info-box');
+
+            infoBoxes.forEach(box => {
+                box.addEventListener('mousemove', (e) => {
+                    const rect = box.getBoundingClientRect();
+                    const x = e.clientX - rect.left;
+                    const y = e.clientY - rect.top;
+
+                    const centerX = rect.width / 2;
+                    const centerY = rect.height / 2;
+
+                    const rotateX = ((y - centerY) / centerY) * 10; // Adjust rotation intensity
+                    const rotateY = ((x - centerX) / centerX) * -10; // Adjust rotation intensity
+
+                    box.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale(1.05)`;
+                });
+
+                box.addEventListener('mouseleave', () => {
+                    box.style.transform = `perspective(1000px) rotateX(0) rotateY(0) scale(1)`;
+                });
+            });
+        });
+    </script>
+</body>
+</html>

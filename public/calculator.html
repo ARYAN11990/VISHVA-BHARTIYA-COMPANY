@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SIP Calculator</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <header>
+<h1 class="logo"> 🌏 VISHVA BHARTIYA COMPANY</h1>
+        <nav class="nav-links">
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="why.html">Why SIP?</a></li>
+                <li><a href="calculator.html">Calculator</a></li>
+                <li><a href="signup.html">Sign Up</a></li>
+                <li><a href="login.html">Login</a></li>
+                <li><a href="contact.html">Contact</a></li>
+            </ul>
+        </nav>
+        <div class="burger-menu" onclick="toggleNav()">
+            <div class="line1"></div>
+            <div class="line2"></div>
+            <div class="line3"></div>
+        </div>
+    </header>
+
+    <main class="content">
+        <h2>SIP Calculator</h2>
+        <p>Estimate your potential wealth creation with our powerful SIP calculator. See how your disciplined investment can grow over time.</p>
+        <div class="form-container">
+            <form id="sip-form" class="sip-form">
+                <div class="form-group">
+                    <label for="monthlyAmount">Monthly Investment (₹):</label>
+                    <input type="number" id="monthlyAmount" name="monthlyAmount" placeholder="e.g., 5000" required>
+                </div>
+                <div class="form-group">
+                    <label for="returnRate">Expected Annual Return (%):</label>
+                    <input type="number" id="returnRate" name="returnRate" placeholder="e.g., 15" required>
+                </div>
+                <div class="form-group">
+                    <label for="timePeriod">Time Period (Years):</label>
+                    <input type="number" id="timePeriod" name="timePeriod" placeholder="e.g., 10" required>
+                </div>
+                <button type="button" class="btn btn-form" onclick="calculateSIP()">Calculate</button>
+            </form>
+            
+            <div id="calculation-result" class="calculation-result" style="display: none;">
+                <h3>Your Investment Summary</h3>
+                <p>Total Amount Invested: <span id="invested-amount"></span></p>
+                <p>Total Estimated Return: <span id="estimated-return"></span></p>
+                <p>Total Value of Investment: <span id="total-value"></span></p>
+            </div>
+        </div>
+    </main>
+
+  <footer>
+    <p>© 2025 VISHVA BHARTIYA COMPANY. All rights reserved.</p>
+    <p>Committed to Indian Values, Serving the World.</p>
+</footer>
+
+
+    <script>
+        const navLinks = document.querySelector('.nav-links');
+        function toggleNav() {
+            navLinks.classList.toggle('nav-active');
+        }
+
+        function calculateSIP() {
+            const monthlyAmount = parseFloat(document.getElementById('monthlyAmount').value);
+            const returnRate = parseFloat(document.getElementById('returnRate').value);
+            const timePeriod = parseFloat(document.getElementById('timePeriod').value);
+
+            if (isNaN(monthlyAmount) || isNaN(returnRate) || isNaN(timePeriod) || monthlyAmount <= 0 || returnRate < 0 || timePeriod <= 0) {
+                alert("Please enter valid positive numbers in all fields.");
+                return;
+            }
+
+            const monthlyRate = returnRate / 12 / 100;
+            const numberOfMonths = timePeriod * 12;
+
+            const futureValue = monthlyAmount * ((Math.pow(1 + monthlyRate, numberOfMonths) - 1) / monthlyRate) * (1 + monthlyRate);
+            const totalInvested = monthlyAmount * numberOfMonths;
+            const estimatedReturn = futureValue - totalInvested;
+
+            document.getElementById('invested-amount').innerText = `₹${totalInvested.toLocaleString('en-IN', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}`;
+            document.getElementById('estimated-return').innerText = `₹${estimatedReturn.toLocaleString('en-IN', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}`;
+            document.getElementById('total-value').innerText = `₹${futureValue.toLocaleString('en-IN', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}`;
+            
+            document.getElementById('calculation-result').style.display = 'block';
+        }
+    </script>
+</body>
+</html>

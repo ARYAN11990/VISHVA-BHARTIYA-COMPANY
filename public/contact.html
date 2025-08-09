@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact Us</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <header>
+        <h1 class="logo"> 🌏 VISHVA BHARTIYA COMPANY</h1>
+        <nav class="nav-links">
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="why.html">Why SIP?</a></li>
+                <li><a href="calculator.html">Calculator</a></li>
+                <li><a href="signup.html">Sign Up</a></li>
+                <li><a href="login.html">Login</a></li>
+                <li><a href="contact.html">Contact</a></li>
+            </ul>
+        </nav>
+        <div class="burger-menu" onclick="toggleNav()">
+            <div class="line1"></div>
+            <div class="line2"></div>
+            <div class="line3"></div>
+        </div>
+    </header>
+
+    <main class="content">
+        <h2>Contact Us</h2>
+        <p>We're here to help. Reach out to us with any questions or feedback.</p>
+        <div class="form-container">
+            <form id="contact-form" class="contact-form">
+                <div class="form-group">
+                    <label for="name">Your Name:</label>
+                    <input type="text" id="name" name="name" required>
+                </div>
+                <div class="form-group">
+                    <label for="email">Your Email:</label>
+                    <input type="email" id="email" name="email" required>
+                </div>
+                <div class="form-group">
+                    <label for="message">Your Message:</label>
+                    <textarea id="message" name="message" rows="50" required></textarea>
+                </div>
+                <button type="submit" class="btn btn-form">Send Message</button>
+            </form>
+        </div>
+    </main>
+
+    <footer>
+        <p>© 2025 VISHVA BHARTIYA COMPANY. All rights reserved.</p>
+        <p>Committed to Indian Values, Serving the World.</p>
+    </footer>
+
+    <script>
+        const navLinks = document.querySelector('.nav-links');
+        function toggleNav() {
+            navLinks.classList.toggle('nav-active');
+        }
+        
+        document.getElementById('contact-form').addEventListener('submit', async function(event) {
+            event.preventDefault();
+            const form = event.target;
+            const formData = new FormData(form);
+            const data = Object.fromEntries(formData);
+            
+            try {
+                const response = await fetch('/contact', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(data)
+                });
+                const result = await response.json();
+                alert(result.message);
+                if (response.ok) {
+                    form.reset(); // Form fields ko clear kar deta hai
+                }
+            } catch (error) {
+                alert('An unexpected error occurred. Please try again.');
+            }
+        });
+    </script>
+</body>
+</html>
